@@ -1,4 +1,4 @@
-# AP Generic Cookiecutter
+# AP Python UV Cookiecutter
 
 This is a project template powered by [Cookiecutter](https://github.com/cookiecutter/cookiecutter) for use with [datakit-project](https://github.com/associatedpress/datakit-project/).
 
