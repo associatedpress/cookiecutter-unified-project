@@ -84,6 +84,12 @@ If you'd like to avoid specifying the template each time, you can edit `~/.datak
 {"default_template": "/Users/lfenn/.cookiecutters/cookiecutter-generic-project"}
 ```
 
+## UV project and package management
+
+Dependencies:
+
+- UV: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+
 ## Configuration
 
 You can set the default name, email, etc. for a project in the `cookiecutter.json` file.
