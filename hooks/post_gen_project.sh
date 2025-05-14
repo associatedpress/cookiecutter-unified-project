@@ -10,7 +10,7 @@ echo '{
 ## Init uv & virtualenv
 uv init
 uv venv
-uv add jupyterlab ipykernel ipython
+uv add jupyterlab ipykernel ipython jupytext jupyterlab_templates
 uv run set_jupyter_kernel.py
 git add .
 git commit -m "Initial commit"
