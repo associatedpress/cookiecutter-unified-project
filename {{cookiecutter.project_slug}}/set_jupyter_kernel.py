@@ -1,6 +1,7 @@
 import subprocess
 import json
 import stat
+import glob
 from pathlib import Path
 
 ## When the project was initially created, it wrote out the
@@ -32,7 +33,7 @@ subprocess.run([
     '--f', 'python3'
 ], check=True)
 
-## Git hack to make working directory in every notebook at the root of the project
+## Git hack to make working directory in every notebook at the root of the project.
 ## Overwrite the kernel json, telling the kernel to use the kernel shell script.
 VENV_DIR = Path('.venv')
 KERNEL_DIR = Path(f'.venv/share/jupyter/kernels/{KERNEL_NAME}')
@@ -64,3 +65,21 @@ with open(kernel_sh_path, 'w') as kernel_sh_file:
 
 ## Execution permissions (equivalent to chmod 777)
 kernel_sh_path.chmod(kernel_sh_path.stat().st_mode | stat.S_IEXEC | stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)
+
+## Copy templates over to venv jupyter location so
+## jupyterlab_templates can find them
+TEMPLATE_PATHS = glob.glob('analysis/notebook_templates/*')
+## make the notebook_templates folder in .venv
+subprocess.run([
+    'mkdir', f"{VENV_DIR.resolve()}/share/jupyter/notebook_templates"
+])
+for path in TEMPLATE_PATHS:
+    subprocess.run([
+        'cp', '-r', path,
+        f'{VENV_DIR.resolve()}/share/jupyter/notebook_templates'
+    ])
+## Enable the jupyterlab_templates server
+subprocess.run([
+    'uv', 'run', 'jupyter', 'server', 'extension', 'enable',
+    '--py', 'jupyterlab_templates'
+])
