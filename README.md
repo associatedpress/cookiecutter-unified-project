@@ -115,6 +115,16 @@ The UV project template aims to address a few pain points:
 11. yaml config and dockerfile for CI tasks. Can we make it part of datakit's interactive setup.
 
 
+### Working with a UV project
+
+After running `datakit project create` with the python UV template, jupyter should be installed in the .venv directory of your project, complete with a customized jupyter ipython kernel named after the project. From there, if there is a package beyond `jupyterlab`, `ipython`, `jupytext`, and `jupyterlab_templates` that is necessary for the project, use `uv add [package]` to install it. If there is a package you like that is not necessary to the project (think dev tools, like vim keybindings) then install it with `uv pip install [package]`. These packages will not be installed when a teammate clones your project and runs the initial setup. To get rid of a package us `uv remove [package]`. To upgrade a package, you can use `uv lock --upgrade-package [package]`.
+
+If you're cloning an existing UV project, follow these steps:
+- `git clone ap-project`
+- `cd ap-project`
+- `uv venv` # make the virtual environment
+- `uv sync` # install necessary packages
+
 ## Configuration
 
 You can set the default name, email, etc. for a project in the `cookiecutter.json` file.
