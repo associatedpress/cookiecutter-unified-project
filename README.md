@@ -93,3 +93,12 @@ Dependencies:
 ## Configuration
 
 You can set the default name, email, etc. for a project in the `cookiecutter.json` file.
+
+## Notes
+
+When cloning a Datakit project that someone else created, you will need to create a virtual environment and install the dependencies. You can do this by running the following from the termminal.
+
+```
+uv venv
+uv sync
+```
