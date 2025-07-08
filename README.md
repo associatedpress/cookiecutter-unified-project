@@ -90,6 +90,41 @@ Dependencies:
 
 - UV: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 
+The UV project template aims to address a few pain points:
+
+1. JupyterLab/Notebook installations are often unwieldy. It's not uncommon to think you're using a kernel you installed yourself, only to find that a package you've recently installed is using a kernel somewhere else. We try to keep Jupyter installs contained in each project within virtualenv's .venv folder.
+
+2. We don't want to choose between restricting our analysis notebooks to one location or memorizing relative paths to data so we can put the notebooks wherever we want. We fix this by telling our ipython kernels to act like they're at the root of the project, no matter where the notebook files are in the project (similar behavior to RStudio).
+
+3. We want a package manager, not just a dump to requirements.txt. This template uses UV.
+
+4. Jupyter notebooks are complicated and not appropriate for git tracking. Simply opening a notebook alters the file, triggering changes the git picks up on. We use Jupytext to link notebooks with simpler markdown files that only change when actual code changes. Only the markdown files are git-tracked.
+
+5. Templates for notebooks.
+
+6. Quarto exports to html
+
+7. What a readme entails, more boilerplate, base minimum viable documentation
+
+8. Interoperability between python and R.
+
+9. Dockerize certain complex environments like gdal/mapping, similar to the Selenium container.
+
+10. Pinning Python interpreter versions.
+
+11. yaml config and dockerfile for CI tasks. Can we make it part of datakit's interactive setup.
+
+
+### Working with a UV project
+
+After running `datakit project create` with the python UV template, jupyter should be installed in the .venv directory of your project, complete with a customized jupyter ipython kernel named after the project. From there, if there is a package beyond `jupyterlab`, `ipython`, `jupytext`, and `jupyterlab_templates` that is necessary for the project, use `uv add [package]` to install it. If there is a package you like that is not necessary to the project (think dev tools, like vim keybindings) then install it with `uv pip install [package]`. These packages will not be installed when a teammate clones your project and runs the initial setup. To get rid of a package us `uv remove [package]`. To upgrade a package, you can use `uv lock --upgrade-package [package]`.
+
+If you're cloning an existing UV project, follow these steps:
+- `git clone ap-project`
+- `cd ap-project`
+- `uv venv` # make the virtual environment
+- `uv sync` # install necessary packages
+
 ## Configuration
 
 You can set the default name, email, etc. for a project in the `cookiecutter.json` file.
