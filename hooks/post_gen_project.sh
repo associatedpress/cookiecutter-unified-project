@@ -8,9 +8,10 @@ echo '{
 }' > kernel_config.json
 
 ## Init uv & virtualenv
-uv init
+uv init --vcs none
 uv venv
 uv add jupyterlab ipykernel ipython jupytext jupyterlab_templates
 uv run set_jupyter_kernel.py
+git init
 git add .
 git commit -m "Initial commit"
