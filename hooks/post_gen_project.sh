@@ -8,7 +8,7 @@ echo '{
 }' > kernel_config.json
 
 ## Init uv & virtualenv
-uv init --vcs none
+uv init --bare --vcs none
 uv venv
 uv add jupyterlab ipykernel ipython jupytext jupyterlab_templates
 uv run set_jupyter_kernel.py
