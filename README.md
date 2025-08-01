@@ -1,4 +1,4 @@
-# AP Python UV Cookiecutter
+# AP Unified Cookiecutter
 
 This is a project template powered by [Cookiecutter](https://github.com/cookiecutter/cookiecutter) for use with [datakit-project](https://github.com/associatedpress/datakit-project/).
 
@@ -7,9 +7,13 @@ This is a project template powered by [Cookiecutter](https://github.com/cookiecu
 ```
 .
 ├── .gitignore
-├── README.md
+├── .Rprofile
+├── _quarto.yml
 ├── analysis
-│   └── archive
+│   ├── archive
+│   └── notebook_templates
+│       └── ap_data_team
+│           └── quarto.ipynb
 ├── data
 │   ├── documentation
 │   ├── handmade
@@ -19,15 +23,20 @@ This is a project template powered by [Cookiecutter](https://github.com/cookiecu
 │   └── source
 ├── etl
 ├── publish
+├── README.md
 ├── scratch
+├── set_jupyter_kernel.py
 ├── viz
+└── {{cookiecutter.project_slug}}.Rproj
 ```
 
 - `.gitignore`
-  - Ignores a few typical temporary/unnecessary files common to most data projects.
-- `README.md`
-  - Project-specific readme with boilerplate for data projects.
-  - Includes sourcing details and places to explain how to replicate/remake the project.
+  - Ignores a few typical temporary/unnecessary files common to most
+    data projects.
+- `.Rprofile`
+  - R configuration
+- `_quarto.yml`
+  - [Quarto](https://quarto.org/) output configuration
 - `analysis`
   - Code that involves analysis on already-cleaned data. Code for cleaning data should go in `etl`.
   - Multiple analysis files are numbered sequentially.
@@ -55,13 +64,26 @@ This is a project template powered by [Cookiecutter](https://github.com/cookiecu
     - Last step of ETL process is to output an [RDS,Pickle] file to data/processed.
       - naming convention: etl_WHATEVERNAME.[rds,pkl]
 - `publish`
-  - This directory holds all documents in the project that will be public facing (e.g. data.world documents).
+  - This directory holds all documents in the project that will be
+    public facing (e.g. data.world documents).
+- `README.md`
+  - Project-specific readme with boilerplate for data projects.
+  - Includes sourcing details and places to explain how to replicate/remake the project.
 - `scratch`
   - This directory contains scratch materials that will not be used in the project at the end.
   - Common cases are filtered tables or quick visualizations for reporters.
   - This directory is not tracked in git.
+- `set_jupyter_kernel.py`
+  - This is a script meant to be run once upon project creation or on
+    cloning to configure jupyter kernels to run from the 'project
+    root' (instead of where the source notebook is located). Users
+    using VS Code can instead configure this behavior via the
+    "Jupyter: Notebook File Root" preference (set to `${workspaceFolder}`)
 - `viz`
-  - Graphics and visualization development specific work such as web interactive code should go here.
+  - Graphics and visualization development specific work such as web
+    interactive code should go here.
+- `{{cookiecutter.project_slug}}.Rproj`
+  - This acts as the Rstudio/Posit "project root" configuration.
 
 ## Usage
 
@@ -69,19 +91,19 @@ You will need to clone this repository to `~/.cookiecutters/` (make the director
 
 ```
 cd path/to/.cookiecutters
-git clone git@github.com:associatedpress/cookiecutter-generic-project
+git clone git@github.com:associatedpress/cookiecutter-unified-project
 ```
 
 Then, use `datakit project`:
 
 ```
-datakit project create --template cookiecutter-generic-project
+datakit project create --template cookiecutter-unified-project
 ```
 
 If you'd like to avoid specifying the template each time, you can edit `~/.datakit/plugins/datakit-project/config.json` to use this template by default:
 
 ```
-{"default_template": "/Users/lfenn/.cookiecutters/cookiecutter-generic-project"}
+{"default_template": "/Users/lfenn/.cookiecutters/cookiecutter-unified-project"}
 ```
 
 ## UV project and package management

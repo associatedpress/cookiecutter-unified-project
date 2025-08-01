@@ -12,3 +12,10 @@ analysis/archive/*.ipynb
 
 scratch/*
 !scratch/.gitkeep
+
+packrat/lib*/
+packrat/src/
+
+.Rproj.user
+.RData
+.Rhistory
