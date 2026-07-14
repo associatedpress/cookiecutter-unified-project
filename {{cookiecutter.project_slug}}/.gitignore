@@ -16,6 +16,8 @@ scratch/*
 packrat/lib*/
 packrat/src/
 
+.sync_status/*
+
 .Rproj.user
 .RData
 .Rhistory
